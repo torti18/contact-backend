@@ -1,0 +1,178 @@
+/* =======================================================
+   1. EFECTOS DE ANIMACIÓN (FADE UP)
+   ======================================================= */
+.fade-up {
+  opacity: 0;
+  transform: translateY(60px) scale(.96);
+  filter: blur(10px);
+  transition:
+    opacity 1s cubic-bezier(.22, 1, .36, 1),
+    transform 1s cubic-bezier(.22, 1, .36, 1),
+    filter 1s cubic-bezier(.22, 1, .36, 1);
+}
+
+.fade-up.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* =======================================================
+   2. FUENTES Y TIPOGRAFÍAS
+   ======================================================= */
+.letra-recta {
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* =======================================================
+   3. SECCIÓN HERO (COMPUTADORA)
+   ======================================================= */
+#hero {
+  min-height: 100vh;
+  background-color: #080808; 
+  display: flex; 
+  align-items: center;
+  padding: 100px 6% 80px;
+  position: relative; 
+  overflow: hidden; 
+}
+
+/* MARCO CON LA IMAGEN EN PC */
+#hero::after {
+  content: "";
+  position: absolute;
+  right: 6%;       
+  top: 50%;
+  transform: translateY(-50%); 
+  width: 45%;
+  height: 55%; 
+  background: url('fondo.png') no-repeat center / cover;
+  border-radius: 20px;           
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);  
+}
+
+/* =======================================================
+   4. ESTRUCTURA DEL MENÚ (MÓVIL Y HAMBURGUESA)
+   ======================================================= */
+
+/* CONFIGURACIÓN DE LA HAMBURGUESA (Las 3 rayitas) */
+.hamburger {
+  display: none; /* Se oculta en computadora */
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 18px;
+  z-index: 1002; /* Por encima de todo */
+}
+
+.hamburger span {
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff; 
+  border-radius: 3px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animación: Las 3 rayas se convierten en una X al abrir */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0; 
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* PANTALLA COMPLETA DEL MENÚ MÓVIL (Efecto cristal oscuro) */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  
+  background: rgba(8, 8, 8, 0.97) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 30px !important; 
+  z-index: 1001;
+  
+  /* Escondido por defecto */
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.05);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ¡AQUÍ ESTÁ EL ARREGLO! Cuando se abre, se vuelve visible y tocable */
+.mobile-menu.active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: scale(1) !important;
+}
+
+/* ENLACES EN CELULAR */
+.mobile-menu a {
+  display: block !important; 
+  font-size: 22px !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  letter-spacing: 1px !important;
+  width: 100%;
+  text-align: center;
+}
+
+/* DISEÑO DEL BOTÓN DE WHATSAPP */
+.mobile-menu a[href*="wa.me"] {
+  color: #22ca60 !important; 
+  border: 1px solid rgba(34, 202, 96, 0.3) !important; 
+  background: rgba(34, 202, 96, 0.04) !important;
+  padding: 12px 30px !important;
+  border-radius: 50px !important; 
+  width: auto !important; 
+  margin-top: 10px;
+}
+
+/* =======================================================
+   5. DETECTOR DE CELULARES (DISEÑO RESPONSIVO)
+   ======================================================= */
+@media (max-width: 768px) {
+  /* Muestra la hamburguesa y esconde el menú horizontal de PC */
+  .hamburger {
+    display: flex; 
+  }
+  .nav-links {
+    display: none; 
+  }
+
+  /* Optimiza el diseño del Hero para celular (Imagen abajo del texto, sin pixelar) */
+  #hero {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 6% 40px; 
+  }
+
+  #hero::after {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin-top: 30px; 
+    width: 85%;       
+    height: 180px; 
+    background: url('fondo.png') no-repeat center / contain;
+    border-radius: 20px;    
+  }}
